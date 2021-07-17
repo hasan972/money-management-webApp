@@ -1,12 +1,11 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     name: {
         type: String,
         required: true,
         trim: true
-
     },
     email: {
         type: String,
@@ -27,7 +26,5 @@ const userSchema = new Schema({
     }
 })
 
-
-// Schema work for create a model and this model methode work for relation with database mongo bd
 const User = mongoose.model('User', userSchema)
 module.exports = User

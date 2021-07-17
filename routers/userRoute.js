@@ -1,13 +1,14 @@
-const router = require("express").Router()
-const { login, register } = require('../controllers/userController')
+const router = require('express').Router()
 
-//For Our registration Route
-//we using controlar later
-router.post('/register', register),
-    //For Login route
-    router.post('/login', login)
+const { login, register, allUser } = require('../controllers/userController')
 
+// Registration Route
+// localhost:4000/api/users/register
+router.post('/register', register)
+
+// Login Route
+// localhost:4000/api/users/login
+router.post('/login', login)
+router.get('/all', allUser)
 
 module.exports = router
-
-//rest client tool is postMan

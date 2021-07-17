@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from "react-redux";
+import { login } from "../store/actions/authAction";
 
 class Login extends Component {
 
@@ -10,6 +12,17 @@ class Login extends Component {
         confirmPassword: '',
         error: {}
     }
+
+    static(nextProps, prevState) {
+        if (
+            JSON.stringify(nextProps.auth.error) !== JSON.stringify(prevState.error)
+        ) {
+            return {
+                error: nextProps.auth.error
+            };
+        }
+        return null;
+    }
     //Handel the onChange event
     changeHandler = event => {
         this.setState({
@@ -18,6 +31,10 @@ class Login extends Component {
     }
     submitHandler = event => {
         event.preventDefault()
+        this.props.login({
+            email: this.state.email,
+            password: this.state.password
+        }, this.props.history)
     }
 
     render() {
@@ -61,5 +78,9 @@ class Login extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    auth: state.auth
+})
 
-export default Login
+export default connect(mapStateToProps, { login })(Login)
+
